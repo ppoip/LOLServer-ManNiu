@@ -1,2 +1,7 @@
 c:\users\ppoip\documents\visual studio 2015\Projects\LOLServer\LOLServer\bin\Debug\LOLServer.exe.config
 C:\Users\ppoip\Desktop\GitHubProject\LOLServer-ManNiu\LOLServer\LOLServer\bin\Debug\LOLServer.exe.config
+C:\Users\ppoip\Desktop\GitHubProject\LOLServer-ManNiu\LOLServer\LOLServer\bin\Debug\LOLServer.exe
+C:\Users\ppoip\Desktop\GitHubProject\LOLServer-ManNiu\LOLServer\LOLServer\bin\Debug\LOLServer.pdb
+C:\Users\ppoip\Desktop\GitHubProject\LOLServer-ManNiu\LOLServer\LOLServer\obj\Debug\LOLServer.csprojResolveAssemblyReference.cache
+C:\Users\ppoip\Desktop\GitHubProject\LOLServer-ManNiu\LOLServer\LOLServer\obj\Debug\LOLServer.exe
+C:\Users\ppoip\Desktop\GitHubProject\LOLServer-ManNiu\LOLServer\LOLServer\obj\Debug\LOLServer.pdb

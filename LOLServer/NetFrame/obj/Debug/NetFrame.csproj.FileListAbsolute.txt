@@ -1,0 +1,5 @@
+C:\Users\ppoip\Desktop\GitHubProject\LOLServer-ManNiu\LOLServer\NetFrame\obj\Debug\NetFrame.csprojResolveAssemblyReference.cache
+C:\Users\ppoip\Desktop\GitHubProject\LOLServer-ManNiu\LOLServer\NetFrame\bin\Debug\NetFrame.dll
+C:\Users\ppoip\Desktop\GitHubProject\LOLServer-ManNiu\LOLServer\NetFrame\bin\Debug\NetFrame.pdb
+C:\Users\ppoip\Desktop\GitHubProject\LOLServer-ManNiu\LOLServer\NetFrame\obj\Debug\NetFrame.dll
+C:\Users\ppoip\Desktop\GitHubProject\LOLServer-ManNiu\LOLServer\NetFrame\obj\Debug\NetFrame.pdb

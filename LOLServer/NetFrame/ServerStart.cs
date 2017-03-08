@@ -33,9 +33,7 @@ namespace NetFrame
             for(int i = 0; i < max; i++)
             {
                 UserToken token = new UserToken();
-                token.receiveSAEA = new SocketAsyncEventArgs();
                 token.receiveSAEA.Completed += new EventHandler<SocketAsyncEventArgs>(IO_Completed);
-                token.sendSAEA = new SocketAsyncEventArgs();
                 token.sendSAEA.Completed += new EventHandler<SocketAsyncEventArgs>(IO_Completed);
                 tokenPool.Push(token);
             }
@@ -80,7 +78,11 @@ namespace NetFrame
 
         public void StartReceive(UserToken token)
         {
-            token.conn.ReceiveAsync(token.receiveSAEA);
+            bool result = token.conn.ReceiveAsync(token.receiveSAEA);
+            if (!result)
+            {
+                ProcessReceive(token.receiveSAEA);
+            }
         }
 
         /// <summary>
@@ -106,7 +108,20 @@ namespace NetFrame
         /// <param name="e"></param>
         public void ProcessReceive(SocketAsyncEventArgs e)
         {
+            UserToken token = e.UserToken as UserToken;
+            if(token.receiveSAEA.BytesTransferred>0 && token.receiveSAEA.SocketError == SocketError.Success)
+            {
+                //收到的数据
+                byte[] message = new byte[token.receiveSAEA.BytesTransferred];
+                Buffer.BlockCopy(token.receiveSAEA.Buffer, 0, message, 0, message.Length);
 
+                //继续接受，递归
+                StartReceive(token);
+            }
+            else
+            {
+
+            }
         }
 
         /// <summary>

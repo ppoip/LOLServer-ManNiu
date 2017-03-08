@@ -20,5 +20,14 @@ namespace NetFrame
 
         /// <summary> 消息发送SocketAsyncEventArgs </summary>
         public SocketAsyncEventArgs sendSAEA;
+
+        public UserToken()
+        {
+            receiveSAEA = new SocketAsyncEventArgs();
+            receiveSAEA.UserToken = this;
+
+            sendSAEA = new SocketAsyncEventArgs();
+            sendSAEA.UserToken = this;
+        }
     }
 }

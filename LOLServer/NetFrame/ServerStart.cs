@@ -23,7 +23,7 @@ namespace NetFrame
         /// <summary> 信号量 </summary>
         Semaphore acceptClientSem;
 
-        public ServerStart(int max,int port)
+        public ServerStart(int max)
         {
             server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             maxClient = max;
@@ -43,10 +43,11 @@ namespace NetFrame
         /// 开始监听
         /// </summary>
         /// <param name="port"></param>
-        public void StartListen(int port)
+        public void Start(int port)
         {
             server.Bind(new IPEndPoint(IPAddress.Any, port));
             server.Listen(10);
+            StartAccept(null);
         }
 
         /// <summary>
@@ -95,7 +96,7 @@ namespace NetFrame
             UserToken token = tokenPool.Pop();
             token.conn = e.AcceptSocket;
 
-            //开启消息监听
+            //开启消息接收
             StartReceive(token);
 
             //释放当前异步对象，递归
@@ -115,12 +116,22 @@ namespace NetFrame
                 byte[] message = new byte[token.receiveSAEA.BytesTransferred];
                 Buffer.BlockCopy(token.receiveSAEA.Buffer, 0, message, 0, message.Length);
 
+                //处理收到的数据
+                token.received(message);
+                
                 //继续接受，递归
                 StartReceive(token);
             }
             else
             {
-
+                if (token.receiveSAEA.SocketError != SocketError.Success)
+                {
+                    ClientClose(token, token.receiveSAEA.SocketError.ToString());
+                }
+                else
+                {
+                    ClientClose(token, "客户端主动断开连接");
+                }
             }
         }
 
@@ -130,7 +141,15 @@ namespace NetFrame
         /// <param name="e"></param>
         public void ProcessSend(SocketAsyncEventArgs e)
         {
-
+            UserToken token = e.UserToken as UserToken;
+            if(token.sendSAEA.SocketError!= SocketError.Success)
+            {
+                ClientClose(token, token.sendSAEA.SocketError.ToString());
+            }else
+            {
+                //消息发送成功，回掉成功
+                token.writted();
+            }
         }
 
         public void Accept_Completed(object sender, SocketAsyncEventArgs e)
@@ -153,6 +172,26 @@ namespace NetFrame
             {
                 ProcessSend(e);
             }
+        }
+
+        /// <summary>
+        /// 关闭客户端连接，并释放信号量
+        /// </summary>
+        /// <param name="token"></param>
+        /// <param name="message"></param>
+        public void ClientClose(UserToken token,string message)
+        {
+            if (token.conn != null)
+            {
+                lock (token)
+                {
+                    token.Close();
+                    tokenPool.Push(token);
+                    acceptClientSem.Release();
+                }
+            }
+
+            Console.WriteLine(message);
         }
 
     }

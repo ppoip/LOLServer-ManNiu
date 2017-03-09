@@ -29,5 +29,36 @@ namespace NetFrame
             sendSAEA = new SocketAsyncEventArgs();
             sendSAEA.UserToken = this;
         }
+
+        public void Close()
+        {
+            try
+            {
+                conn.Shutdown(SocketShutdown.Both);
+                conn.Close();
+                conn = null;
+            }catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+
+        /// <summary>
+        /// 接受到客户端的数据
+        /// </summary>
+        /// <param name="buffer"></param>
+        public void received(byte[] buffer)
+        {
+
+        }
+
+        /// <summary>
+        /// Send成功回调
+        /// </summary>
+        public void writted()
+        {
+
+        }
+
     }
 }

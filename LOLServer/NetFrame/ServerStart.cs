@@ -23,6 +23,12 @@ namespace NetFrame
         /// <summary> 信号量 </summary>
         Semaphore acceptClientSem;
 
+        //编包解包委托
+        public LengthEncode LE;
+        public LengthDecode LD;
+        public PackEncode PE;
+        public PackDecode PD;
+
         public ServerStart(int max)
         {
             server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
@@ -35,6 +41,10 @@ namespace NetFrame
                 UserToken token = new UserToken();
                 token.receiveSAEA.Completed += new EventHandler<SocketAsyncEventArgs>(IO_Completed);
                 token.sendSAEA.Completed += new EventHandler<SocketAsyncEventArgs>(IO_Completed);
+                token.LE = LE;
+                token.LD = LD;
+                token.PE = PE;
+                token.PD = PD;
                 tokenPool.Push(token);
             }
         }
@@ -117,7 +127,7 @@ namespace NetFrame
                 Buffer.BlockCopy(token.receiveSAEA.Buffer, 0, message, 0, message.Length);
 
                 //处理收到的数据
-                token.received(message);
+                token.Received(message);
                 
                 //继续接受，递归
                 StartReceive(token);

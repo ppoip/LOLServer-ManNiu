@@ -27,10 +27,20 @@ namespace NetFrame
         public PackEncode PE;
         public PackDecode PD;
 
+        /// <summary> SendProcess委托 </summary>
+        public Action<SocketAsyncEventArgs> sendProcess;
+
+        /// <summary> reveive缓存 </summary>
         private List<byte> cache = new List<byte>();
 
-        /// <summary> 是否正在读取 </summary>
+        /// <summary> write缓存 </summary>
+        private Queue<byte[]> writeQueue = new Queue<byte[]>();
+
+        /// <summary> 是否正在读取cache </summary>
         private bool isReading = false;
+
+        /// <summary> 是否正在发送writeQueue </summary>
+        private bool isWriting = false;
 
         public UserToken()
         {
@@ -45,6 +55,12 @@ namespace NetFrame
         {
             try
             {
+                //重置
+                cache.Clear();
+                writeQueue.Clear();
+                isReading = false;
+                isWriting = false;
+                //断开连接
                 conn.Shutdown(SocketShutdown.Both);
                 conn.Close();
                 conn = null;
@@ -60,7 +76,8 @@ namespace NetFrame
         /// <param name="buffer"></param>
         public void Received(byte[] buffer)
         {
-
+            //添加到读取缓存
+            cache.AddRange(buffer);
             if (!isReading)
             {
                 isReading = true;
@@ -69,7 +86,7 @@ namespace NetFrame
         }
 
         /// <summary>
-        /// 缓存中有数据
+        /// cache中有数据
         /// </summary>
         void OnData()
         {
@@ -110,11 +127,51 @@ namespace NetFrame
         }
 
         /// <summary>
+        /// 写入data到Send队列
+        /// </summary>
+        /// <param name="data"></param>
+        public void Write(byte[] data)
+        {
+            //入队
+            writeQueue.Enqueue(data);
+            if (!isWriting)
+            {
+                isWriting = true;
+                OnWrite();
+            }
+        }
+
+        /// <summary>
+        /// writeQueue有数据时
+        /// </summary>
+        public void OnWrite()
+        {
+            //队列空时退出
+            if (writeQueue.Count == 0)
+            {
+                isWriting = false;
+                return;
+            }
+
+            byte[] send_data = writeQueue.Dequeue();
+            //设置Send数据
+            sendSAEA.SetBuffer(send_data, 0, send_data.Length);
+            //是否立即完成
+            bool result = conn.SendAsync(sendSAEA);
+            if (!result)
+            {
+                sendProcess(sendSAEA);
+            }
+        }
+
+        /// <summary>
         /// Send成功回调
         /// </summary>
-        public void writted()
+        public void Writted()
         {
 
+            //递归
+            OnWrite();
         }
 
     }

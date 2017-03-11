@@ -39,12 +39,16 @@ namespace NetFrame
             for(int i = 0; i < max; i++)
             {
                 UserToken token = new UserToken();
+                //注册指针
                 token.receiveSAEA.Completed += new EventHandler<SocketAsyncEventArgs>(IO_Completed);
                 token.sendSAEA.Completed += new EventHandler<SocketAsyncEventArgs>(IO_Completed);
+                token.sendProcess = ProcessSend;
+                //赋值解码器
                 token.LE = LE;
                 token.LD = LD;
                 token.PE = PE;
                 token.PD = PD;
+                //加入到token池
                 tokenPool.Push(token);
             }
         }
@@ -83,7 +87,6 @@ namespace NetFrame
             {
                 ProcessAccept(e);
             }
-
 
         }
 
@@ -158,7 +161,7 @@ namespace NetFrame
             }else
             {
                 //消息发送成功，回掉成功
-                token.writted();
+                token.Writted();
             }
         }
 
@@ -178,7 +181,7 @@ namespace NetFrame
             {
                 ProcessReceive(e);
             }
-            else
+            else if(e.LastOperation == SocketAsyncOperation.Send)
             {
                 ProcessSend(e);
             }

@@ -42,6 +42,8 @@
   <ItemGroup>
     <Compile Include="AbsHandlerCenter.cs" />
     <Compile Include="auto\LengthEncoding.cs" />
+    <Compile Include="auto\MessageEncoding.cs" />
+    <Compile Include="auto\SocketModel.cs" />
     <Compile Include="CodingDelegate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServerStart.cs" />

@@ -29,28 +29,19 @@ namespace NetFrame
         public PackEncode PE;
         public PackDecode PD;
 
+        /// <summary> 应用层消息处理中心 </summary>
+        public AbsHandlerCenter center;
+
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="max"></param>
         public ServerStart(int max)
         {
             server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             maxClient = max;
             tokenPool = new UserTokenPool(max);
             acceptClientSem = new Semaphore(max, max);
-
-            for(int i = 0; i < max; i++)
-            {
-                UserToken token = new UserToken();
-                //注册指针
-                token.receiveSAEA.Completed += new EventHandler<SocketAsyncEventArgs>(IO_Completed);
-                token.sendSAEA.Completed += new EventHandler<SocketAsyncEventArgs>(IO_Completed);
-                token.sendProcess = ProcessSend;
-                //赋值解码器
-                token.LE = LE;
-                token.LD = LD;
-                token.PE = PE;
-                token.PD = PD;
-                //加入到token池
-                tokenPool.Push(token);
-            }
         }
 
         /// <summary>
@@ -59,8 +50,31 @@ namespace NetFrame
         /// <param name="port"></param>
         public void Start(int port)
         {
+            //初始化tokenPool
+            for (int i = 0; i < maxClient; i++)
+            {
+                UserToken token = new UserToken();
+                //注册指针
+                token.receiveSAEA.Completed += new EventHandler<SocketAsyncEventArgs>(IO_Completed);
+                token.sendSAEA.Completed += new EventHandler<SocketAsyncEventArgs>(IO_Completed);
+                token.sendProcess = ProcessSend;
+                token.closeProcess = ClientClose;
+                //赋值解码器
+                token.LE = LE;
+                token.LD = LD;
+                token.PE = PE;
+                token.PD = PD;
+                //注入AbsHandlerCenter
+                token.center = this.center;
+                //加入到token池
+                tokenPool.Push(token);
+            }
+
+            //banding IP
             server.Bind(new IPEndPoint(IPAddress.Any, port));
+            //start listen
             server.Listen(10);
+            //start accept
             StartAccept(null);
         }
 
@@ -108,6 +122,9 @@ namespace NetFrame
             //取出连接对象
             UserToken token = tokenPool.Pop();
             token.conn = e.AcceptSocket;
+
+            //通知应用层有客户端连接了
+            center.OnClientConnect(token);
 
             //开启消息接收
             StartReceive(token);
@@ -198,8 +215,13 @@ namespace NetFrame
             {
                 lock (token)
                 {
+                    //通知应用层有客户端断开连接了
+                    center.OnClientClose(token, message);
+                    //reset token
                     token.Close();
+                    //放回token池
                     tokenPool.Push(token);
+                    //释放1个信号量
                     acceptClientSem.Release();
                 }
             }

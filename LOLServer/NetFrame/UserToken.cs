@@ -30,10 +30,16 @@ namespace NetFrame
         /// <summary> SendProcess委托 </summary>
         public Action<SocketAsyncEventArgs> sendProcess;
 
+        /// <summary> 关闭token委托 </summary>
+        public Action<UserToken, string> closeProcess;
+
+        /// <summary> 应用层消息处理中心 </summary>
+        public AbsHandlerCenter center;
+
         /// <summary> reveive缓存 </summary>
         private List<byte> cache = new List<byte>();
 
-        /// <summary> write缓存 </summary>
+        /// <summary> write缓存，Send用队列 </summary>
         private Queue<byte[]> writeQueue = new Queue<byte[]>();
 
         /// <summary> 是否正在读取cache </summary>
@@ -113,7 +119,7 @@ namespace NetFrame
                 }
             }
 
-            //判断是否有反序列化方法
+            //判断是否有反序列化方法，该方法必须有
             if (PD == null)
             {
                 throw new Exception("packdecode is null");
@@ -121,6 +127,9 @@ namespace NetFrame
 
             //反序列化data
             object message = PD(data);
+
+            //通知应用层收到message
+            center.OnMessageReceive(this, message);
 
             //递归
             OnData();
@@ -132,6 +141,12 @@ namespace NetFrame
         /// <param name="data"></param>
         public void Write(byte[] data)
         {
+            if (conn == null)
+            {
+                closeProcess(this, "socket已断开");
+                return;
+            }
+
             //入队
             writeQueue.Enqueue(data);
             if (!isWriting)

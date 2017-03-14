@@ -9,6 +9,11 @@ namespace NetFrame.auto
 {
     public class LengthEncoding
     {
+        /// <summary>
+        /// 长度编包
+        /// </summary>
+        /// <param name="buffer"></param>
+        /// <returns></returns>
         public static byte[] encode(byte[] buffer)
         {
             MemoryStream ms = new MemoryStream();
@@ -27,6 +32,11 @@ namespace NetFrame.auto
             return result;
         }
 
+        /// <summary>
+        /// 长度解包
+        /// </summary>
+        /// <param name="buffer"></param>
+        /// <returns></returns>
         public static byte[] decode(ref List<byte> buffer)
         {
             if (buffer.Count < 4)

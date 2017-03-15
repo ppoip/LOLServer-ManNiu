@@ -51,6 +51,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GameCommon\GameCommon.csproj">
+      <Project>{6bbccf42-d6ac-4f26-be31-af5cd8160713}</Project>
+      <Name>GameCommon</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NetFrame\NetFrame.csproj">
       <Project>{ddf8f0d9-f6cc-4a40-a68e-f518832c7348}</Project>
       <Name>NetFrame</Name>

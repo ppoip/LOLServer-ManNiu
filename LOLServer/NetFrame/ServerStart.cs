@@ -59,6 +59,8 @@ namespace NetFrame
                 token.sendSAEA.Completed += new EventHandler<SocketAsyncEventArgs>(IO_Completed);
                 token.sendProcess = ProcessSend;
                 token.closeProcess = ClientClose;
+                //设置Receive缓冲区
+                token.receiveSAEA.SetBuffer(new byte[1024], 0, 1024);
                 //赋值解码器
                 token.LE = LE;
                 token.LD = LD;
@@ -72,8 +74,11 @@ namespace NetFrame
 
             //banding IP
             server.Bind(new IPEndPoint(IPAddress.Any, port));
+            //server.Bind(new IPEndPoint(new IPAddress(new byte[] { 127, 0, 0, 1 }),port));
+            
             //start listen
             server.Listen(10);
+            
             //start accept
             StartAccept(null);
         }
@@ -106,10 +111,17 @@ namespace NetFrame
 
         public void StartReceive(UserToken token)
         {
-            bool result = token.conn.ReceiveAsync(token.receiveSAEA);
-            if (!result)
+            try
             {
-                ProcessReceive(token.receiveSAEA);
+                bool result = token.conn.ReceiveAsync(token.receiveSAEA);
+                if (!result)
+                {
+                    ProcessReceive(token.receiveSAEA);
+                }
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
             }
         }
 

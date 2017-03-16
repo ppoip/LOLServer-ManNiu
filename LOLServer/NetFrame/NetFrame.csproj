@@ -42,7 +42,6 @@
   <ItemGroup>
     <Compile Include="AbsHandlerCenter.cs" />
     <Compile Include="CodingDelegate.cs" />
-    <Compile Include="HandlerCenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServerStart.cs" />
     <Compile Include="UserToken.cs" />

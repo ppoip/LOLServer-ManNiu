@@ -9,3 +9,5 @@ C:\Users\ppoip\Desktop\GitHubProject\LOLServer-ManNiu\LOLServer\LOLServer\bin\De
 C:\Users\ppoip\Desktop\GitHubProject\LOLServer-ManNiu\LOLServer\LOLServer\bin\Debug\NetFrame.pdb
 C:\Users\ppoip\Desktop\GitHubProject\LOLServer-ManNiu\LOLServer\LOLServer\bin\Debug\GameCommon.dll
 C:\Users\ppoip\Desktop\GitHubProject\LOLServer-ManNiu\LOLServer\LOLServer\bin\Debug\GameCommon.pdb
+C:\Users\ppoip\Desktop\GitHubProject\LOLServer-ManNiu\LOLServer\LOLServer\bin\Debug\GameProtocal.dll
+C:\Users\ppoip\Desktop\GitHubProject\LOLServer-ManNiu\LOLServer\LOLServer\bin\Debug\GameProtocal.pdb

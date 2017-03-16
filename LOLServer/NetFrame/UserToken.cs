@@ -117,6 +117,9 @@ namespace NetFrame
                     isReading = false;
                     return;
                 }
+
+                data = cache.ToArray();
+                cache.Clear();
             }
 
             //判断是否有反序列化方法，该方法必须有

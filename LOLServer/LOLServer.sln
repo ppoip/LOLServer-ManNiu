@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetFrame", "NetFrame\NetFra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameCommon", "GameCommon\GameCommon.csproj", "{6BBCCF42-D6AC-4F26-BE31-AF5CD8160713}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameProtocal", "GameProtocal\GameProtocal.csproj", "{6A01EBDF-8519-49E1-824F-0AC8B7360C0C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{6BBCCF42-D6AC-4F26-BE31-AF5CD8160713}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6BBCCF42-D6AC-4F26-BE31-AF5CD8160713}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6BBCCF42-D6AC-4F26-BE31-AF5CD8160713}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A01EBDF-8519-49E1-824F-0AC8B7360C0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A01EBDF-8519-49E1-824F-0AC8B7360C0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A01EBDF-8519-49E1-824F-0AC8B7360C0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A01EBDF-8519-49E1-824F-0AC8B7360C0C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

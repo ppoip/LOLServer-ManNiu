@@ -40,7 +40,9 @@ namespace LOLServer
             IHandler handler = null;
             if (handlers.ContainsKey(sm.type))
             {
+                //获取对应的handler
                 handler = handlers[sm.type];
+                //handler处理
                 handler.OnMessageReceive(token, message);
             }
         }

@@ -44,11 +44,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="biz\IAccountBiz.cs" />
+    <Compile Include="biz\impl\AccountBiz.cs" />
+    <Compile Include="biz\BizFactory.cs" />
     <Compile Include="HandlerCenter.cs" />
     <Compile Include="Logic\IHandler.cs" />
+    <Compile Include="Logic\AbsOnceHandler.cs" />
     <Compile Include="Logic\Login\LoginHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="tools\ExecutorPool.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -67,7 +72,10 @@
       <Name>NetFrame</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="cache\" />
+    <Folder Include="dao\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

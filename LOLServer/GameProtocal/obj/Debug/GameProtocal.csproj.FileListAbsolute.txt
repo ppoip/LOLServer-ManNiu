@@ -2,3 +2,4 @@ C:\Users\ppoip\Desktop\GitHubProject\LOLServer-ManNiu\LOLServer\GameProtocal\bin
 C:\Users\ppoip\Desktop\GitHubProject\LOLServer-ManNiu\LOLServer\GameProtocal\bin\Debug\GameProtocal.pdb
 C:\Users\ppoip\Desktop\GitHubProject\LOLServer-ManNiu\LOLServer\GameProtocal\obj\Debug\GameProtocal.dll
 C:\Users\ppoip\Desktop\GitHubProject\LOLServer-ManNiu\LOLServer\GameProtocal\obj\Debug\GameProtocal.pdb
+C:\Users\ppoip\Desktop\GitHubProject\LOLServer-ManNiu\LOLServer\GameProtocal\obj\Debug\GameProtocal.csprojResolveAssemblyReference.cache

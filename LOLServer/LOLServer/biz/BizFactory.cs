@@ -1,5 +1,5 @@
-﻿using LOLServer.biz.account;
-using LOLServer.biz.account.impl;
+﻿using LOLServer.biz;
+using LOLServer.biz.impl;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -2,3 +2,4 @@ C:\Users\ppoip\Desktop\GitHubProject\LOLServer-ManNiu\LOLServer\GameCommon\bin\D
 C:\Users\ppoip\Desktop\GitHubProject\LOLServer-ManNiu\LOLServer\GameCommon\bin\Debug\GameCommon.pdb
 C:\Users\ppoip\Desktop\GitHubProject\LOLServer-ManNiu\LOLServer\GameCommon\obj\Debug\GameCommon.dll
 C:\Users\ppoip\Desktop\GitHubProject\LOLServer-ManNiu\LOLServer\GameCommon\obj\Debug\GameCommon.pdb
+C:\Users\ppoip\Desktop\GitHubProject\LOLServer-ManNiu\LOLServer\GameCommon\obj\Debug\GameCommon.csprojResolveAssemblyReference.cache

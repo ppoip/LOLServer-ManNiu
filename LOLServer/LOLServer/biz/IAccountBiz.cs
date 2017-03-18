@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LOLServer.biz.account
+namespace LOLServer.biz
 {
     public interface IAccountBiz
     {
@@ -24,7 +24,7 @@ namespace LOLServer.biz.account
         /// <param name="token"></param>
         /// <param name="account"></param>
         /// <param name="password"></param>
-        /// <returns>0成功，1密码错误，2账号不存在</returns>
+        /// <returns>0成功，-1账号不存在，-2账号已经在线，-3密码错误，-4输入不合法</returns>
         int Login(UserToken token, string account, string password);
 
         /// <summary>

@@ -16,12 +16,15 @@ namespace LOLServer.Logic.Login
     {
         public void OnClientClose(UserToken token, string message)
         {
-            throw new NotImplementedException();
+            ExecutorPool.Instance.Execute(() => 
+            {
+                BizFactory.accountBiz.Close(token);
+            });
         }
 
         public void OnClientConnect(UserToken token)
         {
-            throw new NotImplementedException();
+            
         }
 
         public void OnMessageReceive(UserToken token, object message)

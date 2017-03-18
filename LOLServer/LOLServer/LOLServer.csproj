@@ -47,6 +47,10 @@
     <Compile Include="biz\IAccountBiz.cs" />
     <Compile Include="biz\impl\AccountBiz.cs" />
     <Compile Include="biz\BizFactory.cs" />
+    <Compile Include="cache\CacheFactory.cs" />
+    <Compile Include="cache\IAccountCache.cs" />
+    <Compile Include="cache\impl\AccountCache.cs" />
+    <Compile Include="dao\model\AccountModel.cs" />
     <Compile Include="HandlerCenter.cs" />
     <Compile Include="Logic\IHandler.cs" />
     <Compile Include="Logic\AbsOnceHandler.cs" />
@@ -72,10 +76,7 @@
       <Name>NetFrame</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="cache\" />
-    <Folder Include="dao\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

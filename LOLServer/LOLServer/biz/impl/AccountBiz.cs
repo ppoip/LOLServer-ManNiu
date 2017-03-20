@@ -19,7 +19,7 @@ namespace LOLServer.biz.impl
         public int Create(UserToken token, string account, string password)
         {
             //判断输入是否合法
-            if (account == null || password == null)
+            if (account == null || password == null || account==string.Empty || password==string.Empty)
                 return 2;
 
             //判断账号是否已存在
@@ -40,20 +40,21 @@ namespace LOLServer.biz.impl
         public int Login(UserToken token, string account, string password)
         {
             //判断输入是否合法
-            if (account == null || password == null)
+            if (account == null || password == null || account == string.Empty || password == string.Empty)
                 return -4;
 
             //判断账号是否不存在
             if (!CacheFactory.accountCache.HasAccount(account))
                 return -1;
 
+            //判断密码是否正确
+            if (!CacheFactory.accountCache.Match(account, password))
+                return -3;
+
             //判断账号是否在线
             if (CacheFactory.accountCache.IsOnline(account))
                 return -2;
 
-            //判断密码是否正确
-            if (!CacheFactory.accountCache.Match(account, password))
-                return -3;
 
             CacheFactory.accountCache.Online(token, account);
             return 0;

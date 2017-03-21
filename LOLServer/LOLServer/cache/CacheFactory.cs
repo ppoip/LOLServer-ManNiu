@@ -10,10 +10,12 @@ namespace LOLServer.cache
     public class CacheFactory
     {
         public static IAccountCache accountCache;
+        public static IUserCache userCache;
 
         static CacheFactory()
         {
             accountCache = new AccountCache();
+            userCache = new UserCache();
         }
     }
 }

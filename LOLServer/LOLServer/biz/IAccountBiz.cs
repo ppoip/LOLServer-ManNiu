@@ -34,7 +34,7 @@ namespace LOLServer.biz
         void Close(UserToken token);
 
         /// <summary>
-        /// 获取账号ID
+        /// 获取连接对象登陆的账号ID
         /// </summary>
         /// <param name="token"></param>
         /// <returns></returns>

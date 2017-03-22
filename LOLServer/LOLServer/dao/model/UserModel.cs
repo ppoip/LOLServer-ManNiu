@@ -9,6 +9,7 @@ namespace LOLServer.dao.model
     public class UserModel
     {
         public int id;
+        public int accountId;  //所属账号id
         public string name;
         public int level;
         public int exp;

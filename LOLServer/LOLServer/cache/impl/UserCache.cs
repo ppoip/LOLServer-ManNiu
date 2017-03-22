@@ -21,7 +21,7 @@ namespace LOLServer.cache.impl
         /// <summary> 主键索引 </summary>
         int idIndex = 0;
 
-        public bool Add(UserToken token, string name)
+        public bool Add(UserToken token, string name,int accountId)
         {
             //是否已经有角色
             if (Exist(token))
@@ -35,7 +35,8 @@ namespace LOLServer.cache.impl
                 level = 0,
                 loseCount = 0,
                 ranCount = 0,
-                winCount = 0
+                winCount = 0,
+                accountId= accountId
             });
             idIndex++;
             return true;
@@ -49,8 +50,12 @@ namespace LOLServer.cache.impl
         public UserDTO GetInfo(UserToken token)
         {
             //如果不存在角色
+            /*
             if (!Exist(token))
-                return null;
+                return null;    //error : null无法序列化
+            */
+            if (!Exist(token))
+                return new UserDTO(); //返回空信息
 
             UserModel model = userMap[BizFactory.accountBiz.GetID(token)];
             UserDTO dto = new UserDTO()
@@ -61,7 +66,8 @@ namespace LOLServer.cache.impl
                 loseCount = model.loseCount,
                 name = model.name,
                 ranCount = model.ranCount,
-                winCount = model.winCount
+                winCount = model.winCount,
+                accountId = model.accountId
             };
             return dto;
         }
@@ -102,8 +108,8 @@ namespace LOLServer.cache.impl
 
         public bool Online(UserToken token)
         {
-            //是否创建了角色
-            if (Exist(token))
+            //是否已经在线
+            if (!IsOnline(token))
             {
                 onlineUsers.Add(token, userMap[BizFactory.accountBiz.GetID(token)].id);
                 return true;

@@ -16,7 +16,7 @@ namespace LOLServer.cache
         /// <param name="token"></param>
         /// <param name="name"></param>
         /// <returns></returns>
-        bool Add(UserToken token, string name);
+        bool Add(UserToken token, string name, int accountId);
 
         /// <summary>
         /// 该连接对象登陆的账号是否已存在角色

@@ -8,6 +8,7 @@ using GameProtocal;
 using LOLServer.Logic.Login;
 using NetFrame;
 using GameCommon;
+using LOLServer.Logic.User;
 
 namespace LOLServer
 {
@@ -20,6 +21,7 @@ namespace LOLServer
         {
             //初始化所有handler
             handlers.Add(Protocal.TYPE_LOGIN, new LoginHandler());
+            handlers.Add(Protocal.TYPE_USER, new UserHandler());
         }
 
 
@@ -29,6 +31,9 @@ namespace LOLServer
             Console.WriteLine("有客户端断开连接，Message:"+message);
             if (handlers.ContainsKey(Protocal.TYPE_LOGIN))
             {
+                //角色下线
+                handlers[Protocal.TYPE_USER].OnClientClose(token, message);
+                //账号下线
                 handlers[Protocal.TYPE_LOGIN].OnClientClose(token,message);
             }
         }

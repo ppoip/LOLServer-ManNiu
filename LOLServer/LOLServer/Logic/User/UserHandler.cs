@@ -15,7 +15,11 @@ namespace LOLServer.Logic.User
     {
         public void OnClientClose(UserToken token, string message)
         {
-            throw new NotImplementedException();
+            //下线角色
+            ExecutorPool.Instance.Execute(() =>
+            {
+                BizFactory.userBiz.Offline(token);
+            });
         }
 
         public void OnClientConnect(UserToken token)

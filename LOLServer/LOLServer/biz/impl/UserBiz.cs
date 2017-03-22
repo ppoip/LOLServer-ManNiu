@@ -17,7 +17,7 @@ namespace LOLServer.biz.impl
             if (BizFactory.accountBiz.GetID(token) == -1)
                 return false;
 
-            return CacheFactory.userCache.Add(token, name);
+            return CacheFactory.userCache.Add(token, name, BizFactory.accountBiz.GetID(token));
         }
 
         public UserDTO GetInfo(UserToken token)

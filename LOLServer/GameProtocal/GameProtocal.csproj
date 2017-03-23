@@ -44,6 +44,7 @@
     <Compile Include="dto\AccountInfoDTO.cs" />
     <Compile Include="dto\UserDTO.cs" />
     <Compile Include="LoginProtocal.cs" />
+    <Compile Include="MatchProtocal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Protocal.cs" />
     <Compile Include="UserProtocal.cs" />

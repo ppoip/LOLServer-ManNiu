@@ -9,6 +9,7 @@ using LOLServer.Logic.Login;
 using NetFrame;
 using GameCommon;
 using LOLServer.Logic.User;
+using LOLServer.Logic.Match;
 
 namespace LOLServer
 {
@@ -22,6 +23,7 @@ namespace LOLServer
             //初始化所有handler
             handlers.Add(Protocal.TYPE_LOGIN, new LoginHandler());
             handlers.Add(Protocal.TYPE_USER, new UserHandler());
+            handlers.Add(Protocal.TYPE_MATCH, new MatchHandler());
         }
 
 

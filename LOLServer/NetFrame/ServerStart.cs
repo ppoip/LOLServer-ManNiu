@@ -238,7 +238,7 @@ namespace NetFrame
                 }
             }
 
-            Console.WriteLine(message);
+            //Console.WriteLine(message);
         }
 
     }

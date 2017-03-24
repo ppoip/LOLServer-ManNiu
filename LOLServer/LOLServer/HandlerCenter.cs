@@ -31,13 +31,13 @@ namespace LOLServer
         public override void OnClientClose(UserToken token, string message)
         {
             Console.WriteLine("有客户端断开连接，Message:"+message);
-            if (handlers.ContainsKey(Protocal.TYPE_LOGIN))
-            {
-                //角色下线
-                handlers[Protocal.TYPE_USER].OnClientClose(token, message);
-                //账号下线
-                handlers[Protocal.TYPE_LOGIN].OnClientClose(token,message);
-            }
+
+            //角色离开房间
+            handlers[Protocal.TYPE_MATCH].OnClientClose(token, message);
+            //角色下线
+            handlers[Protocal.TYPE_USER].OnClientClose(token, message);
+            //账号下线
+            handlers[Protocal.TYPE_LOGIN].OnClientClose(token,message);
         }
 
         public override void OnClientConnect(UserToken token)

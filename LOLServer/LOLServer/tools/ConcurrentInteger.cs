@@ -22,5 +22,20 @@ namespace LOLServer.tools
                 return value;
             }
         }
+
+        public void Reset()
+        {
+            lock (this)
+            {
+                mutex.WaitOne();
+                value = 0;
+                mutex.ReleaseMutex();
+            }
+        }
+
+        public int Get()
+        {
+            return value;
+        }
     }
 }

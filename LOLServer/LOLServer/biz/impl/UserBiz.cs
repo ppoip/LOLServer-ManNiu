@@ -30,6 +30,11 @@ namespace LOLServer.biz.impl
             return CacheFactory.userCache.GetInfoByAccountID(accountID);
         }
 
+        public UserToken GetUserToken(int userId)
+        {
+            return CacheFactory.userCache.GetUserToken(userId);
+        }
+
         public bool IsOnline(UserToken token)
         {
             return CacheFactory.userCache.IsOnline(token);

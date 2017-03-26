@@ -5,3 +5,10 @@ C:\Users\ppoip\Desktop\GitHubProject\LOLServer-ManNiu\LOLServer\NetFrame\obj\Deb
 C:\Users\ppoip\Desktop\GitHubProject\LOLServer-ManNiu\LOLServer\NetFrame\obj\Debug\NetFrame.pdb
 C:\Users\ppoip\Desktop\GitHubProject\LOLServer-ManNiu\LOLServer\NetFrame\bin\Debug\GameCommon.dll
 C:\Users\ppoip\Desktop\GitHubProject\LOLServer-ManNiu\LOLServer\NetFrame\bin\Debug\GameCommon.pdb
+C:\Users\ppoip\Desktop\github_project\LOLServer-ManNiu\LOLServer\NetFrame\bin\Debug\NetFrame.dll
+C:\Users\ppoip\Desktop\github_project\LOLServer-ManNiu\LOLServer\NetFrame\bin\Debug\NetFrame.pdb
+C:\Users\ppoip\Desktop\github_project\LOLServer-ManNiu\LOLServer\NetFrame\bin\Debug\GameCommon.dll
+C:\Users\ppoip\Desktop\github_project\LOLServer-ManNiu\LOLServer\NetFrame\bin\Debug\GameCommon.pdb
+C:\Users\ppoip\Desktop\github_project\LOLServer-ManNiu\LOLServer\NetFrame\obj\Debug\NetFrame.csprojResolveAssemblyReference.cache
+C:\Users\ppoip\Desktop\github_project\LOLServer-ManNiu\LOLServer\NetFrame\obj\Debug\NetFrame.dll
+C:\Users\ppoip\Desktop\github_project\LOLServer-ManNiu\LOLServer\NetFrame\obj\Debug\NetFrame.pdb

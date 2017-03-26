@@ -58,5 +58,12 @@ namespace LOLServer.cache
         /// </summary>
         /// <param name="token"></param>
         void Offline(UserToken token);
+
+        /// <summary>
+        /// 通过userId获取UserToken
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        UserToken GetUserToken(int userId);
     }
 }

@@ -10,6 +10,7 @@ using NetFrame;
 using GameCommon;
 using LOLServer.Logic.User;
 using LOLServer.Logic.Match;
+using LOLServer.Logic.Select;
 
 namespace LOLServer
 {
@@ -24,6 +25,7 @@ namespace LOLServer
             handlers.Add(Protocal.TYPE_LOGIN, new LoginHandler());
             handlers.Add(Protocal.TYPE_USER, new UserHandler());
             handlers.Add(Protocal.TYPE_MATCH, new MatchHandler());
+            handlers.Add(Protocal.TYPE_SELECT, new SelectHandler());
         }
 
 
@@ -32,7 +34,9 @@ namespace LOLServer
         {
             Console.WriteLine("有客户端断开连接，Message:"+message);
 
-            //角色离开房间
+            //角色离开选人房间
+            handlers[Protocal.TYPE_SELECT].OnClientClose(token, message);
+            //角色离开匹配房间
             handlers[Protocal.TYPE_MATCH].OnClientClose(token, message);
             //角色下线
             handlers[Protocal.TYPE_USER].OnClientClose(token, message);

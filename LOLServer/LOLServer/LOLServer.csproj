@@ -57,12 +57,14 @@
     <Compile Include="dao\model\AccountModel.cs" />
     <Compile Include="dao\model\UserModel.cs" />
     <Compile Include="HandlerCenter.cs" />
+    <Compile Include="Logic\AbsMultiHandler.cs" />
     <Compile Include="Logic\IHandler.cs" />
     <Compile Include="Logic\AbsOnceHandler.cs" />
     <Compile Include="Logic\Login\LoginHandler.cs" />
     <Compile Include="Logic\Match\MatchHandler.cs" />
     <Compile Include="Logic\Match\MatchRoom.cs" />
     <Compile Include="Logic\Select\SelectHandler.cs" />
+    <Compile Include="Logic\Select\SelectRoom.cs" />
     <Compile Include="Logic\User\UserHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

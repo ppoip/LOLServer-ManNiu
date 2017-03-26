@@ -92,6 +92,18 @@ namespace LOLServer.cache.impl
             return dto;
         }
 
+        public UserToken GetUserToken(int userId)
+        {
+            foreach (var kv in onlineUsers)
+            {
+                if (kv.Value == userId) 
+                {
+                    return kv.Key;
+                }
+            }
+            return null;
+        }
+
         public bool IsOnline(UserToken token)
         {
             return onlineUsers.ContainsKey(token);

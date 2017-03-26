@@ -11,3 +11,15 @@ C:\Users\ppoip\Desktop\GitHubProject\LOLServer-ManNiu\LOLServer\LOLServer\bin\De
 C:\Users\ppoip\Desktop\GitHubProject\LOLServer-ManNiu\LOLServer\LOLServer\bin\Debug\GameCommon.pdb
 C:\Users\ppoip\Desktop\GitHubProject\LOLServer-ManNiu\LOLServer\LOLServer\bin\Debug\GameProtocal.dll
 C:\Users\ppoip\Desktop\GitHubProject\LOLServer-ManNiu\LOLServer\LOLServer\bin\Debug\GameProtocal.pdb
+C:\Users\ppoip\Desktop\github_project\LOLServer-ManNiu\LOLServer\LOLServer\bin\Debug\LOLServer.exe.config
+C:\Users\ppoip\Desktop\github_project\LOLServer-ManNiu\LOLServer\LOLServer\bin\Debug\LOLServer.exe
+C:\Users\ppoip\Desktop\github_project\LOLServer-ManNiu\LOLServer\LOLServer\bin\Debug\LOLServer.pdb
+C:\Users\ppoip\Desktop\github_project\LOLServer-ManNiu\LOLServer\LOLServer\bin\Debug\GameCommon.dll
+C:\Users\ppoip\Desktop\github_project\LOLServer-ManNiu\LOLServer\LOLServer\bin\Debug\GameProtocal.dll
+C:\Users\ppoip\Desktop\github_project\LOLServer-ManNiu\LOLServer\LOLServer\bin\Debug\NetFrame.dll
+C:\Users\ppoip\Desktop\github_project\LOLServer-ManNiu\LOLServer\LOLServer\bin\Debug\GameCommon.pdb
+C:\Users\ppoip\Desktop\github_project\LOLServer-ManNiu\LOLServer\LOLServer\bin\Debug\GameProtocal.pdb
+C:\Users\ppoip\Desktop\github_project\LOLServer-ManNiu\LOLServer\LOLServer\bin\Debug\NetFrame.pdb
+C:\Users\ppoip\Desktop\github_project\LOLServer-ManNiu\LOLServer\LOLServer\obj\Debug\LOLServer.csprojResolveAssemblyReference.cache
+C:\Users\ppoip\Desktop\github_project\LOLServer-ManNiu\LOLServer\LOLServer\obj\Debug\LOLServer.exe
+C:\Users\ppoip\Desktop\github_project\LOLServer-ManNiu\LOLServer\LOLServer\obj\Debug\LOLServer.pdb

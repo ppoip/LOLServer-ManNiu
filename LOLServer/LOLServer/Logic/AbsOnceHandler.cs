@@ -50,7 +50,7 @@ namespace LOLServer.Logic
 
         public void Write(UserToken token,int area, int command, object message)
         {
-            Write(token, GetTypeNumber(), GetAreaNumber(), command, message);
+            Write(token, GetTypeNumber(), area, command, message);
         }
 
         public void Write(UserToken token,byte type, int area, int command, object message)
@@ -62,7 +62,7 @@ namespace LOLServer.Logic
 
 
 
-        private SocketModel CreateSocketModel(byte type, int area, int command, object message)
+        protected SocketModel CreateSocketModel(byte type, int area, int command, object message)
         {
             return new SocketModel() { type = type, area = type, command = command, message = message };
         }

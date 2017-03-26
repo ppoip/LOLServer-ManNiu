@@ -5,3 +5,8 @@ C:\Users\ppoip\Desktop\GitHubProject\LOLServer-ManNiu\LOLServer\GameCommon\obj\D
 C:\Users\ppoip\Desktop\GitHubProject\LOLServer-ManNiu\LOLServer\GameCommon\obj\Debug\GameCommon.csprojResolveAssemblyReference.cache
 C:\Users\ppoip\Desktop\GitHubProject\LOLClient-ManNiu\LOLClient\Assets\Plugins\GameCommon.dll
 C:\Users\ppoip\Desktop\GitHubProject\LOLClient-ManNiu\LOLClient\Assets\Plugins\GameCommon.pdb
+C:\Users\ppoip\Desktop\github_project\LOLClient-ManNiu\LOLClient\Assets\Plugins\GameCommon.dll
+C:\Users\ppoip\Desktop\github_project\LOLClient-ManNiu\LOLClient\Assets\Plugins\GameCommon.pdb
+C:\Users\ppoip\Desktop\github_project\LOLServer-ManNiu\LOLServer\GameCommon\obj\Debug\GameCommon.csprojResolveAssemblyReference.cache
+C:\Users\ppoip\Desktop\github_project\LOLServer-ManNiu\LOLServer\GameCommon\obj\Debug\GameCommon.dll
+C:\Users\ppoip\Desktop\github_project\LOLServer-ManNiu\LOLServer\GameCommon\obj\Debug\GameCommon.pdb

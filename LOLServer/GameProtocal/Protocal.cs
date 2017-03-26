@@ -15,5 +15,8 @@ namespace GameProtocal
         /// <summary> 战斗匹配 </summary>
         public const byte TYPE_MATCH = 2;
 
+        /// <summary> 选人模块 </summary>
+        public const byte TYPE_SELECT = 3;
+
     }
 }

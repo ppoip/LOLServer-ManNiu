@@ -5,3 +5,8 @@ C:\Users\ppoip\Desktop\GitHubProject\LOLServer-ManNiu\LOLServer\GameProtocal\obj
 C:\Users\ppoip\Desktop\GitHubProject\LOLServer-ManNiu\LOLServer\GameProtocal\obj\Debug\GameProtocal.csprojResolveAssemblyReference.cache
 C:\Users\ppoip\Desktop\GitHubProject\LOLClient-ManNiu\LOLClient\Assets\Plugins\GameProtocal.dll
 C:\Users\ppoip\Desktop\GitHubProject\LOLClient-ManNiu\LOLClient\Assets\Plugins\GameProtocal.pdb
+C:\Users\ppoip\Desktop\github_project\LOLClient-ManNiu\LOLClient\Assets\Plugins\GameProtocal.dll
+C:\Users\ppoip\Desktop\github_project\LOLClient-ManNiu\LOLClient\Assets\Plugins\GameProtocal.pdb
+C:\Users\ppoip\Desktop\github_project\LOLServer-ManNiu\LOLServer\GameProtocal\obj\Debug\GameProtocal.csprojResolveAssemblyReference.cache
+C:\Users\ppoip\Desktop\github_project\LOLServer-ManNiu\LOLServer\GameProtocal\obj\Debug\GameProtocal.dll
+C:\Users\ppoip\Desktop\github_project\LOLServer-ManNiu\LOLServer\GameProtocal\obj\Debug\GameProtocal.pdb

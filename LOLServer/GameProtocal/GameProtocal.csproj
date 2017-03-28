@@ -42,11 +42,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="dto\AccountInfoDTO.cs" />
+    <Compile Include="dto\SelectModel.cs" />
     <Compile Include="dto\UserDTO.cs" />
     <Compile Include="LoginProtocal.cs" />
     <Compile Include="MatchProtocal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Protocal.cs" />
+    <Compile Include="SelectProtocal.cs" />
     <Compile Include="UserProtocal.cs" />
   </ItemGroup>
   <ItemGroup />

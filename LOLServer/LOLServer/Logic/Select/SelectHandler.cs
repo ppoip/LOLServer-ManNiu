@@ -15,7 +15,7 @@ namespace LOLServer.Logic.Select
         /// <summary> 玩家所在匹配房间映射 (userId,房间Area) </summary>
         private ConcurrentDictionary<int, int> userRoom = new ConcurrentDictionary<int, int>();
 
-        /// <summary> 房间id与模型映射 </summary>
+        /// <summary> 房间Area与模型映射 </summary>
         private ConcurrentDictionary<int, SelectRoom> roomMap = new ConcurrentDictionary<int, SelectRoom>();
 
         /// <summary> 回收利用过的房间对象 </summary>
@@ -50,14 +50,10 @@ namespace LOLServer.Logic.Select
             room.SetAreaNumber(areaIndex.GetAndAdd());
             //初始化房间
             room.Init(teamOne, teamTwo);
-            //roomMap
+            //add into roomMap
             roomMap.TryAdd(room.GetAreaNumber(), room);
-            //userRoom
-            foreach(int userId in room.teamOne)
-            {
-                userRoom.TryAdd(userId, room.GetAreaNumber());
-            }
-            foreach (int userId in room.teamTwo)
+            //add into userRoom
+            foreach(int userId in room.GetAllUserId())
             {
                 userRoom.TryAdd(userId, room.GetAreaNumber());
             }
@@ -76,22 +72,22 @@ namespace LOLServer.Logic.Select
                 return;
 
             //移除userRoom
-            foreach(int userId in room.teamOne)
+            foreach(int userId in room.GetAllUserId())
             {
                 int temp;
                 userRoom.TryRemove(userId, out temp);
             }
-            foreach (int userId in room.teamTwo)
-            {
-                int temp;
-                userRoom.TryRemove(userId, out temp);
-            }
+            //Clear
+            room.OnDestroy();
             //roomMap
             roomMap.TryRemove(roomArea, out room);
+            //放回缓存
+            cache.Push(room);
         }
 
         public void OnClientClose(UserToken token, string message)
         {
+            /*  
             int userId = BizFactory.userBiz.GetInfo(token).id;
             //remove userRoom
             int roomArea;
@@ -100,14 +96,10 @@ namespace LOLServer.Logic.Select
                 SelectRoom room = null;
                 if(roomMap.TryGetValue(roomArea,out room))
                 {
-                    //remove team
-                    room.teamOne.Remove(userId);
-                    room.teamTwo.Remove(userId);
-
-                    //leave 移除token
-                    room.Leave(BizFactory.userBiz.GetUserToken(userId));
+                    room.OnClientClose(token, message);
                 }
             }
+            */
         }
 
         public void OnClientConnect(UserToken token)
@@ -117,7 +109,21 @@ namespace LOLServer.Logic.Select
 
         public void OnMessageReceive(UserToken token, object message)
         {
-            throw new NotImplementedException();
+            int userId;
+            //获取对应的userId
+            userId = BizFactory.userBiz.GetInfo(token).id;
+            int roomArea;
+            //获取对应的roomArea
+            if(userRoom.TryGetValue(userId,out roomArea))
+            {
+                SelectRoom room = null;
+                //获取对应的room
+                if(roomMap.TryGetValue(roomArea,out room))
+                {
+                    //通知相应房间
+                    room.OnMessageReceive(token, message);
+                }
+            }
         }
     }
 }

@@ -11,5 +11,7 @@ namespace GameProtocal
 
         public const int LEAVE_CREQ = 2;  //离开队列
         public const int LEAVE_SRES = 3;
+
+        public const int ENTER_SELECT_BRO = 4; //广播，匹配完毕，通知进入选人界面
     }
 }

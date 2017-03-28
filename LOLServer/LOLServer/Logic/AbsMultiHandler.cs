@@ -47,14 +47,22 @@ namespace LOLServer.Logic
             return tokenList.Contains(token);
         }
 
+        /// <summary>
+        /// 清空token
+        /// </summary>
+        protected void ClearToken()
+        {
+            tokenList.Clear();
+        }
+
         public void Broadcast(int command, object message, UserToken exToken)
         {
-            Broadcast(GetAreaNumber(), message, exToken);
+            Broadcast(GetAreaNumber(), command, message, exToken);
         }
 
         public void Broadcast(int area, int command, object message, UserToken exToken)
         {
-            Broadcast(GetTypeNumber(), area, command, exToken);
+            Broadcast(GetTypeNumber(), area, command, message, exToken);
         }
 
         /// <summary>

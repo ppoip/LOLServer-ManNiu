@@ -71,6 +71,8 @@
     <Compile Include="tools\ConcurrentInteger.cs" />
     <Compile Include="tools\EventUtil.cs" />
     <Compile Include="tools\ExecutorPool.cs" />
+    <Compile Include="tools\ScheduleUtil.cs" />
+    <Compile Include="tools\TimerTaskModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

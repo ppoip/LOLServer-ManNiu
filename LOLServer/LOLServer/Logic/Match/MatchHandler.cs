@@ -123,12 +123,15 @@ namespace LOLServer.Logic.Match
             if(joinedRoom.teamMax*2 == (joinedRoom.teamOne.Count + joinedRoom.teamTwo.Count))
             {
                 //房间满人
-                //通知进入选角模块
+                //创建一个选人房间
                 EventUtil.CreateSelect(joinedRoom.teamOne, joinedRoom.teamTwo);
-                    
+                //通知进入选角模块
+                WriteToUsers(joinedRoom.teamOne, GetTypeNumber(), 0, MatchProtocal.ENTER_SELECT_BRO, 0);
+                WriteToUsers(joinedRoom.teamTwo, GetTypeNumber(), 0, MatchProtocal.ENTER_SELECT_BRO, 0);
+
                 //移除房间
                 //remove userRoom
-                foreach(int uid in joinedRoom.teamOne)
+                foreach (int uid in joinedRoom.teamOne)
                 {
                     int value;
                     userRoom.TryRemove(uid,out value);

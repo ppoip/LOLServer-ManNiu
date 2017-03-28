@@ -1,4 +1,5 @@
 ﻿using GameCommon;
+using LOLServer.biz;
 using NetFrame;
 using System;
 using System.Collections.Generic;
@@ -60,7 +61,26 @@ namespace LOLServer.Logic
         }
         #endregion
 
-
+        /// <summary>
+        /// 向一组用户发送响应
+        /// </summary>
+        /// <param name="users"></param>
+        /// <param name="type"></param>
+        /// <param name="area"></param>
+        /// <param name="command"></param>
+        /// <param name="message"></param>
+        public void WriteToUsers(List<int> users, byte type, int area, int command, object message)
+        {
+            SocketModel sm = CreateSocketModel(type, area, command, message);
+            byte[] data = LengthEncoding.encode(MessageEncoding.Encode(sm));
+            foreach(int userId in users)
+            {
+                //token
+                UserToken token = BizFactory.userBiz.GetUserToken(userId);
+                //send
+                token.Write(data);
+            }
+        }
 
         protected SocketModel CreateSocketModel(byte type, int area, int command, object message)
         {

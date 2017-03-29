@@ -87,19 +87,19 @@ namespace LOLServer.Logic.Select
 
         public void OnClientClose(UserToken token, string message)
         {
-            /*  
             int userId = BizFactory.userBiz.GetInfo(token).id;
             //remove userRoom
             int roomArea;
             if(userRoom.TryRemove(userId,out roomArea))
             {
                 SelectRoom room = null;
-                if(roomMap.TryGetValue(roomArea,out room))
+                //获取对应的room
+                if (roomMap.TryGetValue(roomArea,out room))
                 {
                     room.OnClientClose(token, message);
                 }
             }
-            */
+            
         }
 
         public void OnClientConnect(UserToken token)

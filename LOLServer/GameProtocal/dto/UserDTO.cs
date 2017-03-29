@@ -15,6 +15,7 @@ namespace GameProtocal.dto
         public int winCount;
         public int loseCount;
         public int ranCount;    //逃跑场次
+        public List<int> ownHeroList;  //玩家拥有的英雄
 
         public UserDTO() { }
     }

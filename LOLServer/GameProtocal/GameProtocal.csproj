@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="dto\AccountInfoDTO.cs" />
     <Compile Include="dto\SelectModel.cs" />
+    <Compile Include="dto\SelectRoomDTO.cs" />
     <Compile Include="dto\UserDTO.cs" />
     <Compile Include="LoginProtocal.cs" />
     <Compile Include="MatchProtocal.cs" />

@@ -13,7 +13,7 @@ namespace GameProtocal
 
         //玩家选择了一个英雄
         public const int SELECT_CREQ = 3;
-        public const int SELECT_SRES = 4;
+        public const int SELECT_SRES = 4;  //选择失败才会发送该响应，否则广播select
         public const int SELECT_BRO = 5;
 
         //玩家发送文字聊天

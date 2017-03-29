@@ -55,7 +55,7 @@ namespace LOLServer.Logic
             tokenList.Clear();
         }
 
-        public void Broadcast(int command, object message, UserToken exToken)
+        public void Broadcast(int command, object message, UserToken exToken=null)
         {
             Broadcast(GetAreaNumber(), command, message, exToken);
         }

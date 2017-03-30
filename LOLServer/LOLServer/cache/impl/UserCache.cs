@@ -27,7 +27,7 @@ namespace LOLServer.cache.impl
             if (Exist(token))
                 return false;
 
-            userMap.Add(idIndex,new UserModel()
+            userMap.Add(idIndex, new UserModel()
             {
                 name = name,
                 id = idIndex,
@@ -36,7 +36,8 @@ namespace LOLServer.cache.impl
                 loseCount = 0,
                 ranCount = 0,
                 winCount = 0,
-                accountId= accountId
+                accountId = accountId,
+                ownHeroList = new List<int>()
             });
             idIndex++;
             return true;
@@ -67,7 +68,8 @@ namespace LOLServer.cache.impl
                 name = model.name,
                 ranCount = model.ranCount,
                 winCount = model.winCount,
-                accountId = model.accountId
+                accountId = model.accountId,
+                ownHeroList = model.ownHeroList
             };
             return dto;
         }
@@ -87,7 +89,8 @@ namespace LOLServer.cache.impl
                 loseCount = model.loseCount,
                 name = model.name,
                 ranCount = model.ranCount,
-                winCount = model.winCount
+                winCount = model.winCount,
+                ownHeroList = model.ownHeroList
             };
             return dto;
         }

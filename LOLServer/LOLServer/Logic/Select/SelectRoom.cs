@@ -202,6 +202,7 @@ namespace LOLServer.Logic.Select
             if (model.hero == -1)
             {
                 //玩家还没有选择英雄，不可以准备
+                return;
             }
             else
             {
@@ -215,7 +216,7 @@ namespace LOLServer.Logic.Select
             //判断房间所有玩家是否都已经准备好，是就开始战斗
             if (readyList.Count >= (modelTeamOne.Count + modelTeamTwo.Count))
             {
-                //通知开始战斗
+                //开始战斗
 
 
                 //销毁当前房间

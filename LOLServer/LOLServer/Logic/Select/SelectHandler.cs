@@ -71,7 +71,7 @@ namespace LOLServer.Logic.Select
             if (room==null)
                 return;
 
-            //移除userRoom
+            //移除userRoom映射
             foreach(int userId in room.GetAllUserId())
             {
                 int temp;
@@ -79,7 +79,7 @@ namespace LOLServer.Logic.Select
             }
             //Clear
             room.OnDestroy();
-            //roomMap
+            //移除roomMap映射
             roomMap.TryRemove(roomArea, out room);
             //放回缓存
             cache.Push(room);

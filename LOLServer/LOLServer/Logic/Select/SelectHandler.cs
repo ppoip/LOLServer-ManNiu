@@ -7,6 +7,7 @@ using NetFrame;
 using LOLServer.tools;
 using System.Collections.Concurrent;
 using LOLServer.biz;
+using GameProtocal;
 
 namespace LOLServer.Logic.Select
 {
@@ -124,6 +125,11 @@ namespace LOLServer.Logic.Select
                     room.OnMessageReceive(token, message);
                 }
             }
+        }
+
+        public override byte GetTypeNumber()
+        {
+            return Protocal.TYPE_SELECT;
         }
     }
 }

@@ -162,7 +162,7 @@ namespace LOLServer.Logic.Select
             }
             if (modelTeamTwo.ContainsKey(userId))
             {
-                modelTeamOne[userId].isEnter = true;
+                modelTeamTwo[userId].isEnter = true;
             }
             //响应进入房间请求，返回房间所有玩家数据
             SelectRoomDTO roomDto = new SelectRoomDTO();

@@ -187,5 +187,10 @@ namespace LOLServer.Logic.Match
             //Console.WriteLine("有玩家离开了房间");
         }
 
+        public override byte GetTypeNumber()
+        {
+            return Protocal.TYPE_MATCH;
+        }
+
     }
 }

@@ -22,9 +22,14 @@ namespace LOLServer
         public HandlerCenter()
         {
             //初始化所有handler
+
+            //登陆模块
             handlers.Add(Protocal.TYPE_LOGIN, new LoginHandler());
+            //角色模块
             handlers.Add(Protocal.TYPE_USER, new UserHandler());
+            //匹配模块
             handlers.Add(Protocal.TYPE_MATCH, new MatchHandler());
+            //选人模块
             handlers.Add(Protocal.TYPE_SELECT, new SelectHandler());
         }
 

@@ -37,7 +37,7 @@ namespace LOLServer.cache.impl
                 ranCount = 0,
                 winCount = 0,
                 accountId = accountId,
-                ownHeroList = new List<int>()
+                ownHeroList = new List<int>() {1,2,3,4,5,6,7,8,9,10,11,12 }   //注册赠送英雄
             });
             idIndex++;
             return true;

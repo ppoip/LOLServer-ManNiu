@@ -217,7 +217,7 @@ namespace LOLServer.Logic.Select
             if (readyList.Count >= (modelTeamOne.Count + modelTeamTwo.Count))
             {
                 //开始战斗
-
+                Broadcast(SelectProtocal.FIGHT_BRO, 0);
 
                 //销毁当前房间
                 EventUtil.DestroySelect(GetAreaNumber());

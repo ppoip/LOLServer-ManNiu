@@ -11,6 +11,7 @@ using GameCommon;
 using LOLServer.Logic.User;
 using LOLServer.Logic.Match;
 using LOLServer.Logic.Select;
+using LOLServer.Logic.Fight;
 
 namespace LOLServer
 {
@@ -31,6 +32,8 @@ namespace LOLServer
             handlers.Add(Protocal.TYPE_MATCH, new MatchHandler());
             //选人模块
             handlers.Add(Protocal.TYPE_SELECT, new SelectHandler());
+            //战斗模块
+            handlers.Add(Protocal.TYPE_FIGHT, new FightHandler());
         }
 
 

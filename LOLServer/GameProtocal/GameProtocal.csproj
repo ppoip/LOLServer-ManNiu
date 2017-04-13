@@ -41,7 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="constants\BuildingData.cs" />
+    <Compile Include="constants\HeroData.cs" />
+    <Compile Include="constants\SkillData.cs" />
     <Compile Include="dto\AccountInfoDTO.cs" />
+    <Compile Include="dto\fight\AbsFightModel.cs" />
+    <Compile Include="dto\fight\BuildingFightModel.cs" />
+    <Compile Include="dto\fight\FightSkill.cs" />
+    <Compile Include="dto\fight\PlayerFightModel.cs" />
     <Compile Include="dto\SelectModel.cs" />
     <Compile Include="dto\SelectRoomDTO.cs" />
     <Compile Include="dto\UserDTO.cs" />

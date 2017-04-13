@@ -58,6 +58,8 @@
     <Compile Include="dao\model\UserModel.cs" />
     <Compile Include="HandlerCenter.cs" />
     <Compile Include="Logic\AbsMultiHandler.cs" />
+    <Compile Include="Logic\Fight\FightHandler.cs" />
+    <Compile Include="Logic\Fight\FightRoom.cs" />
     <Compile Include="Logic\IHandler.cs" />
     <Compile Include="Logic\AbsOnceHandler.cs" />
     <Compile Include="Logic\Login\LoginHandler.cs" />

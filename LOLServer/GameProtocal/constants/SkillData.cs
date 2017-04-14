@@ -27,7 +27,6 @@ namespace GameProtocol.constans
            SkillDataModel model = new SkillDataModel(code, name, info, type, target, levels);
            skillMap.Add(code, model);
        }
-
    }
    [Serializable]
    public class SkillLevelData

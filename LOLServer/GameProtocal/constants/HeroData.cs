@@ -9,7 +9,7 @@ namespace GameProtocal.constants
     /// </summary>
     public class HeroData
     {
-        /// <summary> 所有英雄 </summary>
+        /// <summary> 所有英雄 map(heroId,HeroDataModel) </summary>
         public static readonly Dictionary<int, HeroDataModel> heroMap = new Dictionary<int, HeroDataModel>();
 
         static HeroData()

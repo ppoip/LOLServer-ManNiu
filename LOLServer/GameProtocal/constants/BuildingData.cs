@@ -10,10 +10,10 @@ namespace GameProtocal.constants
 
         static BuildingData()
         {
-            Create(1,"主基地", 5000, 0, 50, false, true, false, 0);
-            Create(2,"高级箭塔", 3000, 200, 50, false, true, true, 30);
-            Create(3,"中级箭塔", 2000, 150, 30, true, true, false, 0);
-            Create(4,"初级箭塔", 1000, 100, 20, true, true, false, 0);
+            //Create(1,"主基地", 5000, 0, 50, false, true, false, 0);
+            Create(1,"高级箭塔", 3000, 200, 50, false, true, true, 30);
+            Create(2,"中级箭塔", 2000, 150, 30, true, true, false, 0);
+            Create(3,"初级箭塔", 1000, 100, 20, true, true, false, 0);
         }
 
         static void Create(int code, string name, int hp, int atk, int def, bool initiative, bool infrared, bool reborn, int rebornTime)

@@ -11,6 +11,7 @@ using GameProtocal.dto.fight;
 using GameProtocal.constants;
 using static GameProtocal.constants.HeroData;
 using GameProtocol.constans;
+using static GameProtocal.constants.BuildingData;
 
 namespace LOLServer.Logic.Fight
 {
@@ -23,6 +24,11 @@ namespace LOLServer.Logic.Fight
         private ConcurrentDictionary<int, AbsFightModel> modelTeamTwo = new ConcurrentDictionary<int, AbsFightModel>();
 
 
+        /// <summary>
+        /// 初始化房间
+        /// </summary>
+        /// <param name="teamOne"></param>
+        /// <param name="teamTwo"></param>
         public void Init(SelectModel[] teamOne, SelectModel[] teamTwo)
         {
             //初始化玩家战斗模型
@@ -37,9 +43,15 @@ namespace LOLServer.Logic.Fight
                 modelTeamTwo.TryAdd(item.userId, model);
             }
             //初始化建筑
-            //TODO
-
-
+            //队伍1 建筑id[-1,-10] ，队伍2 建筑id[-11,-20]
+            for (int i = -1; i >= -3; i--) //初始化3个建筑，位置与id绑定
+            {
+                modelTeamOne.TryAdd(i, CreateBuildingFightModel(i, Math.Abs(i)));
+            }
+            for (int i = -11; i >= -13; i--) //初始化3个建筑，位置与id绑定
+            {
+                modelTeamTwo.TryAdd(i, CreateBuildingFightModel(i, Math.Abs(i)-10));
+            }
 
         }
 
@@ -118,6 +130,37 @@ namespace LOLServer.Logic.Fight
 
             return skills;
         }
+
+        /// <summary>
+        /// 创建建筑
+        /// </summary>
+        /// <param name="id">唯一id</param>
+        /// <param name="code">建筑code</param>
+        /// <returns></returns>
+        private BuildingFightModel CreateBuildingFightModel(int id, int code)
+        {
+            //获取相应建筑数据
+            BuildingDataModel dataModel = BuildingData.buildingMap[code];
+            //构造战斗实体
+            BuildingFightModel retModel = new BuildingFightModel()
+            {
+                id = id,
+                code = code,
+                atk = dataModel.atk,
+                born = dataModel.reborn,
+                bornTime = dataModel.rebornTime,
+                curHp = dataModel.hp,
+                maxHp = dataModel.hp,
+                def = dataModel.def,
+                infrared = dataModel.infrared,
+                initiative = dataModel.initiative,
+                name = dataModel.name
+            };
+
+            return retModel;
+        }
+
+
 
         public void OnClientClose(UserToken token, string message)
         {

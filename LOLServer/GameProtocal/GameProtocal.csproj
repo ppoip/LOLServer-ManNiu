@@ -52,6 +52,7 @@
     <Compile Include="dto\SelectModel.cs" />
     <Compile Include="dto\SelectRoomDTO.cs" />
     <Compile Include="dto\UserDTO.cs" />
+    <Compile Include="FightProtocal.cs" />
     <Compile Include="LoginProtocal.cs" />
     <Compile Include="MatchProtocal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

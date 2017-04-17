@@ -4,6 +4,7 @@ using System.Text;
 
 namespace GameProtocal.dto.fight
 {
+    [Serializable]
     public class AbsFightModel
     {
         /// <summary> 战斗区域中 唯一识别码 </summary>

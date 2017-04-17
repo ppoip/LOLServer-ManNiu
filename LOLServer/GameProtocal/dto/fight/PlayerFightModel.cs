@@ -4,6 +4,7 @@ using System.Text;
 
 namespace GameProtocal.dto.fight
 {
+    [Serializable]
     public class PlayerFightModel:AbsFightModel
     {
         /// <summary> 等级 </summary>

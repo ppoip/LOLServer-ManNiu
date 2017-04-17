@@ -4,6 +4,7 @@ using System.Text;
 
 namespace GameProtocal.dto.fight
 {
+    [Serializable]
     public class BuildingFightModel:AbsFightModel
     {
         /// <summary> 是否重生 </summary>

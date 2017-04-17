@@ -216,6 +216,9 @@ namespace LOLServer.Logic.Select
             //判断房间所有玩家是否都已经准备好，是就开始战斗
             if (readyList.Count >= (modelTeamOne.Count + modelTeamTwo.Count))
             {
+                //创建战斗房间
+                EventUtil.CreateFight(modelTeamOne.Values.ToArray(), modelTeamTwo.Values.ToArray());
+
                 //开始战斗
                 Broadcast(SelectProtocal.FIGHT_BRO, 0);
 

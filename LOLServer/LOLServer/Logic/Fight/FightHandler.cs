@@ -7,6 +7,7 @@ using NetFrame;
 using System.Collections.Concurrent;
 using LOLServer.tools;
 using GameProtocal.dto;
+using LOLServer.biz;
 
 namespace LOLServer.Logic.Fight
 {
@@ -85,7 +86,12 @@ namespace LOLServer.Logic.Fight
 
         public void OnClientClose(UserToken token, string message)
         {
-            throw new NotImplementedException();
+            int roomId;
+            if (userRoom.TryGetValue(BizFactory.userBiz.GetInfo(token).id, out roomId))
+            {
+                //传递给玩家所在房间处理
+                roomMap[roomId].OnClientClose(token, message);
+            }
         }
 
         public void OnClientConnect(UserToken token)
@@ -95,7 +101,12 @@ namespace LOLServer.Logic.Fight
 
         public void OnMessageReceive(UserToken token, object message)
         {
-            throw new NotImplementedException();
+            int roomId;
+            if (userRoom.TryGetValue(BizFactory.userBiz.GetInfo(token).id, out roomId))
+            {
+                //传递给玩家所在房间处理
+                roomMap[roomId].OnMessageReceive(token, message);
+            }
         }
     }
 }

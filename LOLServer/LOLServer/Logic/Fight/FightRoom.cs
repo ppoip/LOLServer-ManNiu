@@ -12,6 +12,8 @@ using GameProtocal.constants;
 using static GameProtocal.constants.HeroData;
 using GameProtocol.constans;
 using static GameProtocal.constants.BuildingData;
+using GameCommon;
+using LOLServer.tools;
 
 namespace LOLServer.Logic.Fight
 {
@@ -23,6 +25,8 @@ namespace LOLServer.Logic.Fight
         /// <summary> 队伍2战斗模型 </summary>
         private ConcurrentDictionary<int, AbsFightModel> modelTeamTwo = new ConcurrentDictionary<int, AbsFightModel>();
 
+        /// <summary> 已经加载资源完成的玩家数量 </summary>
+        private ConcurrentInteger enterCount = new ConcurrentInteger();
 
         /// <summary>
         /// 初始化房间
@@ -174,12 +178,49 @@ namespace LOLServer.Logic.Fight
 
         public void OnMessageReceive(UserToken token, object message)
         {
-            throw new NotImplementedException();
+            SocketModel model = message as SocketModel;
+            switch (model.command)
+            {
+                case FightProtocal.LOADING_COMPLETED_CQEQ:
+                    ProcessLoadingCompleted(token);
+                    break;
+            }
         }
+
+        /// <summary>
+        /// 处理玩家加载资源完成
+        /// </summary>
+        /// <param name="token"></param>
+        private void ProcessLoadingCompleted(UserToken token)
+        {
+            if (IsExist(token))
+                return;
+
+            //加入到房间token数组
+            Enter(token);
+
+            //计数+1
+            enterCount.GetAndAdd();
+
+            //判断是否全部加载完成
+            if(enterCount.Get() >= modelTeamOne.Count + modelTeamTwo.Count)
+            {
+                //广播开始战斗
+                FightRoomModels models = new FightRoomModels()
+                {
+                    teamOne = modelTeamOne.Values.ToArray(),
+                    teamTwo = modelTeamTwo.Values.ToArray()
+                };
+                Broadcast(FightProtocal.START_BRO, models);
+            }
+        }
+
 
         public void OnDestroy()
         {
-            //TODO
+            modelTeamOne.Clear();
+            modelTeamTwo.Clear();
+            enterCount = new ConcurrentInteger();
         }
 
         public override byte GetTypeNumber()
@@ -189,8 +230,17 @@ namespace LOLServer.Logic.Fight
 
         public List<int> GetAllUserId()
         {
-            //TODO
-            return null;
+            List<int> userIds = new List<int>();
+            foreach (var kv in modelTeamOne)
+            {
+                userIds.Add(kv.Key);
+            }
+            foreach (var kv in modelTeamTwo)
+            {
+                userIds.Add(kv.Key);
+            }
+
+            return userIds;
         }
     }
 }

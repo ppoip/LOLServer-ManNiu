@@ -58,7 +58,7 @@ namespace LOLServer.cache.impl
             if (!Exist(token))
                 return new UserDTO(); //返回空信息
 
-            UserModel model = userMap[BizFactory.accountBiz.GetID(token)];
+            UserModel model = userMap[onlineUsers[token]];
             UserDTO dto = new UserDTO()
             {
                 exp = model.exp,

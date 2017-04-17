@@ -4,6 +4,7 @@ using System.Text;
 
 namespace GameProtocal.dto.fight
 {
+    [Serializable]
     public class FightSkill
     {
         /// <summary> 技能代码 </summary>

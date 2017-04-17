@@ -42,12 +42,18 @@ namespace LOLServer
         {
             Console.WriteLine("有客户端断开连接，Message:"+message);
 
+            //角色西开战斗房间
+            handlers[Protocal.TYPE_FIGHT].OnClientClose(token, message);
+
             //角色离开选人房间
             handlers[Protocal.TYPE_SELECT].OnClientClose(token, message);
+
             //角色离开匹配房间
             handlers[Protocal.TYPE_MATCH].OnClientClose(token, message);
+
             //角色下线
             handlers[Protocal.TYPE_USER].OnClientClose(token, message);
+
             //账号下线
             handlers[Protocal.TYPE_LOGIN].OnClientClose(token,message);
         }

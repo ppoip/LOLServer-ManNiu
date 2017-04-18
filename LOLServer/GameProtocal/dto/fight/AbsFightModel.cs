@@ -39,5 +39,16 @@ namespace GameProtocal.dto.fight
 
         /// <summary> 视野范围 </summary>
         public float viewRange;
+
+        /// <summary> 模型类型 </summary>
+        public ModelType modelType;
     }
+
+    public enum ModelType
+    {
+        Building,   //建筑
+        Human       //生命体
+    }
+
+
 }

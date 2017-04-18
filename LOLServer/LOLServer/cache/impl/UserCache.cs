@@ -37,7 +37,7 @@ namespace LOLServer.cache.impl
                 ranCount = 0,
                 winCount = 0,
                 accountId = accountId,
-                ownHeroList = new List<int>() {1,2,3,4}   //注册赠送英雄
+                ownHeroList = new List<int>() {1,2}   //注册赠送英雄
             });
             idIndex++;
             return true;
@@ -58,7 +58,7 @@ namespace LOLServer.cache.impl
             if (!Exist(token))
                 return new UserDTO(); //返回空信息
 
-            UserModel model = userMap[onlineUsers[token]];
+            UserModel model = userMap[BizFactory.accountBiz.GetID(token)];
             UserDTO dto = new UserDTO()
             {
                 exp = model.exp,

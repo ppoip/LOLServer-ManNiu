@@ -19,7 +19,7 @@ namespace LOLServer.biz
         bool Create(UserToken token,string name);
 
         /// <summary>
-        /// 获取该连接对象对应的角色信息
+        /// 获取该连接对象所登陆的账号下的第一个角色的信息
         /// </summary>
         /// <param name="token"></param>
         /// <returns></returns>

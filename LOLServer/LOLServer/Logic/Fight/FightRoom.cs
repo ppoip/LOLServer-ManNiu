@@ -35,7 +35,7 @@ namespace LOLServer.Logic.Fight
         /// <param name="teamTwo"></param>
         public void Init(SelectModel[] teamOne, SelectModel[] teamTwo)
         {
-            //初始化玩家战斗模型
+            //初始化玩家战斗模型 玩家id [0,正无穷]
             foreach (var item in teamOne)
             {
                 var model = CreatePlayerFightModel(item);
@@ -92,7 +92,8 @@ namespace LOLServer.Logic.Fight
                 def = heroDataModel.defBase,
                 speed = heroDataModel.speed,
                 viewRange = heroDataModel.viewRange,
-                skills = CreateFightSkills(heroDataModel.skills)  //创建技能模型
+                skills = CreateFightSkills(heroDataModel.skills),  //创建技能模型
+                modelType = ModelType.Human
             };
 
             return retModel;
@@ -158,7 +159,8 @@ namespace LOLServer.Logic.Fight
                 def = dataModel.def,
                 infrared = dataModel.infrared,
                 initiative = dataModel.initiative,
-                name = dataModel.name
+                name = dataModel.name,
+                modelType = ModelType.Building
             };
 
             return retModel;
@@ -168,7 +170,9 @@ namespace LOLServer.Logic.Fight
 
         public void OnClientClose(UserToken token, string message)
         {
-            throw new NotImplementedException();
+            //玩家离开战场
+            //TODO
+            Leave(token);
         }
 
         public void OnClientConnect(UserToken token)
@@ -203,7 +207,7 @@ namespace LOLServer.Logic.Fight
             enterCount.GetAndAdd();
 
             //判断是否全部加载完成
-            if(enterCount.Get() >= modelTeamOne.Count + modelTeamTwo.Count)
+            if (enterCount.Get() >= modelTeamOne.Count(x => x.Key >= 0) + modelTeamTwo.Count(x => x.Key >= 0)) 
             {
                 //广播开始战斗
                 FightRoomModels models = new FightRoomModels()

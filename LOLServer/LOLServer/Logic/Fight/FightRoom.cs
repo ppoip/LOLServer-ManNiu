@@ -14,6 +14,7 @@ using GameProtocol.constans;
 using static GameProtocal.constants.BuildingData;
 using GameCommon;
 using LOLServer.tools;
+using LOLServer.biz;
 
 namespace LOLServer.Logic.Fight
 {
@@ -188,6 +189,10 @@ namespace LOLServer.Logic.Fight
                 case FightProtocal.LOADING_COMPLETED_CQEQ:
                     ProcessLoadingCompleted(token);
                     break;
+
+                case FightProtocal.MOVE_CREQ:
+                    ProcessHeroMoveReq(token,model.message as HeroMoveDto);
+                    break;
             }
         }
 
@@ -217,6 +222,17 @@ namespace LOLServer.Logic.Fight
                 };
                 Broadcast(FightProtocal.START_BRO, models);
             }
+        }
+
+        /// <summary>
+        /// 处理玩家英雄移动
+        /// </summary>
+        /// <param name="token"></param>
+        /// <param name="dto"></param>
+        private void ProcessHeroMoveReq(UserToken token,HeroMoveDto dto)
+        {
+            dto.userId = BizFactory.userBiz.GetInfo(token).id;
+            Broadcast(FightProtocal.MOVE_BRO, dto);
         }
 
 

@@ -29,6 +29,12 @@ namespace LOLServer.Logic.Fight
         /// <summary> 已经加载资源完成的玩家数量 </summary>
         private ConcurrentInteger enterCount = new ConcurrentInteger();
 
+        /// <summary> 已经离线的玩家 </summary>
+        private ConcurrentDictionary<int, UserToken> offlinePlayer = new ConcurrentDictionary<int, UserToken>();
+
+        /// <summary> 该房间玩家的个数 </summary>
+        private ConcurrentInteger playerCount = new ConcurrentInteger();
+
         /// <summary>
         /// 初始化房间
         /// </summary>
@@ -36,6 +42,9 @@ namespace LOLServer.Logic.Fight
         /// <param name="teamTwo"></param>
         public void Init(SelectModel[] teamOne, SelectModel[] teamTwo)
         {
+            //设置房间人数
+            playerCount.Set(teamOne.Length + teamTwo.Length);
+
             //初始化玩家战斗模型 玩家id [0,正无穷]
             foreach (var item in teamOne)
             {
@@ -172,8 +181,20 @@ namespace LOLServer.Logic.Fight
         public void OnClientClose(UserToken token, string message)
         {
             //玩家离开战场
-            //TODO
             Leave(token);
+
+            //添加到离线玩家字典
+            if (!offlinePlayer.ContainsKey(BizFactory.userBiz.GetInfo(token).id))
+            {
+                offlinePlayer.TryAdd(BizFactory.userBiz.GetInfo(token).id, token);
+            }
+
+            //判断是否所有玩家都离线
+            if(offlinePlayer.Count >= playerCount.Get())
+            {
+                //销毁战斗房间
+                EventUtil.DestroyFight(GetAreaNumber());
+            }
         }
 
         public void OnClientConnect(UserToken token)
@@ -212,7 +233,7 @@ namespace LOLServer.Logic.Fight
             enterCount.GetAndAdd();
 
             //判断是否全部加载完成
-            if (enterCount.Get() >= modelTeamOne.Count(x => x.Key >= 0) + modelTeamTwo.Count(x => x.Key >= 0)) 
+            if (enterCount.Get() >= playerCount.Get()) 
             {
                 //广播开始战斗
                 FightRoomModels models = new FightRoomModels()
@@ -241,6 +262,9 @@ namespace LOLServer.Logic.Fight
             modelTeamOne.Clear();
             modelTeamTwo.Clear();
             enterCount = new ConcurrentInteger();
+            offlinePlayer.Clear();
+            playerCount = new ConcurrentInteger();
+            ClearToken();
         }
 
         public override byte GetTypeNumber()

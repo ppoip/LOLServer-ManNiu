@@ -37,5 +37,15 @@ namespace LOLServer.tools
         {
             return value;
         }
+
+        public void Set(int value)
+        {
+            lock (this)
+            {
+                mutex.WaitOne();
+                this.value = value;
+                mutex.ReleaseMutex();
+            }
+        }
     }
 }

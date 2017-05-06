@@ -214,6 +214,10 @@ namespace LOLServer.Logic.Fight
                 case FightProtocal.MOVE_CREQ:
                     ProcessHeroMoveReq(token,model.message as HeroMoveDto);
                     break;
+
+                case FightProtocal.ATTACK_CREQ:
+                    ProcessHeroAttack(token, (int)model.message);
+                    break;
             }
         }
 
@@ -254,6 +258,23 @@ namespace LOLServer.Logic.Fight
         {
             dto.userId = BizFactory.userBiz.GetInfo(token).id;
             Broadcast(FightProtocal.MOVE_BRO, dto);
+        }
+
+        /// <summary>
+        /// 处理玩家英雄普通攻击请求
+        /// </summary>
+        /// <param name="token"></param>
+        /// <param name="targetId"></param>
+        private void ProcessHeroAttack(UserToken token,int targetId)
+        {
+            HeroAttackDto dto = new HeroAttackDto()
+            {
+                srcId = BizFactory.userBiz.GetInfo(token).id,
+                targetId = targetId
+            };
+
+            Broadcast(FightProtocal.ATTACK_BRO, dto);
+            Console.WriteLine(string.Format("广播->UserName:{0} attack UserName:{1}", BizFactory.userBiz.GetInfo(token).name, BizFactory.userBiz.GetInfo(BizFactory.userBiz.GetUserToken(targetId)).name));
         }
 
 

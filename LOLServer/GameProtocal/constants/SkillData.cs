@@ -49,11 +49,12 @@ namespace GameProtocol.constans
    public partial class SkillDataModel
    {
        public int code;
-       public SkillLevelData[] levels;//技能不同等级数据
        public string name;
        public string info;
        public SkillTargetType target;//技能目标类型
        public SkillType type;
+       public SkillLevelData[] levels;//技能不同等级数据
+
        public SkillDataModel() { }
        public SkillDataModel(int code, string name, string info, SkillType type, SkillTargetType target, SkillLevelData[] levels)
        {

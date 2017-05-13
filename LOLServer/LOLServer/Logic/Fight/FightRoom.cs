@@ -218,6 +218,10 @@ namespace LOLServer.Logic.Fight
                 case FightProtocal.ATTACK_CREQ:
                     ProcessHeroAttack(token, (int)model.message);
                     break;
+
+                case FightProtocal.DAMAGE_CREQ:
+                    ProcessDamage(token, model.message as DamageDTO);
+                    break;
             }
         }
 
@@ -277,6 +281,77 @@ namespace LOLServer.Logic.Fight
             Console.WriteLine(string.Format("广播->UserName:{0} attack UserName:{1}", BizFactory.userBiz.GetInfo(token).name, BizFactory.userBiz.GetInfo(BizFactory.userBiz.GetUserToken(targetId)).name));
         }
 
+        /// <summary>
+        /// 处理伤害请求
+        /// </summary>
+        /// <param name="token"></param>
+        /// <param name="dto"></param>
+        private void ProcessDamage(UserToken token,DamageDTO dto)
+        {
+            if(dto.damageSrcId >= 0)
+            {
+                //只能请求自己的伤害
+                if (dto.damageSrcId != BizFactory.userBiz.GetInfo(token).id)
+                    return;
+
+                //获取攻击源战斗模型
+                AbsFightModel srcModel = GetRoomFightModel(dto.damageSrcId);
+
+                //ret result
+                int[][] retResult = new int[][] { };
+
+                foreach (var item in dto.parameters)
+                {
+                    //被攻击者模型
+                    AbsFightModel targetModel = GetRoomFightModel(item[0]);
+
+                    //获取该技能当前等级
+                    int skillLevel = GetSkillLevel(dto.damageSrcId, dto.skillId);
+
+                    //获取技能伤害处理Map
+                    ISkillProc attackProc = SkillProcessMap.hasSkillProc(dto.skillId) ? SkillProcessMap.GetSkillProc(dto.skillId) : null;
+                    if (attackProc == null)
+                    {
+                        Console.WriteLine("找不到技能处理程序:" + dto.skillId.ToString());
+                        return;
+                    }
+
+                    //伤害处理
+                    attackProc.DamageTarget(skillLevel, ref srcModel, ref targetModel, ref retResult);
+
+                    if (targetModel.curHp == 0)
+                    {
+                        switch (targetModel.modelType)
+                        {
+                            case ModelType.Building:
+                                    //击杀了建筑
+                                break;
+                            case ModelType.Human:
+                                if (targetModel.id >= 0)
+                                {
+                                    //击杀玩家
+                                }
+                                else
+                                {
+                                    //击杀小兵
+                                }
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+
+                //广播伤害处理
+                dto.parameters = retResult;
+                Broadcast(FightProtocal.DAMAGE_BRO, dto);
+            }
+            else
+            {
+                //小兵及建筑伤害请求
+            }
+        }
+
 
         public void OnDestroy()
         {
@@ -307,5 +382,39 @@ namespace LOLServer.Logic.Fight
 
             return userIds;
         }
+
+        private AbsFightModel GetRoomFightModel(int id)
+        {
+            if (modelTeamOne.ContainsKey(id))
+                return modelTeamOne[id];
+
+            return modelTeamTwo[id];
+        }
+
+        private int GetSkillLevel(int modelId,int skillId)
+        {
+            AbsFightModel model = GetRoomFightModel(modelId);
+            if (model.modelType == ModelType.Human)
+            {
+                //英雄则返回技能等级
+                PlayerFightModel playerModel = model as PlayerFightModel;
+                foreach (var item in playerModel.skills)
+                {
+                    if(item.code == skillId)
+                    {
+                        return item.level;
+                    }
+                }
+                
+            }
+            else
+            {
+                //非英雄直接返回-1
+                return -1;
+            }
+
+            return -1;
+        }
+
     }
 }

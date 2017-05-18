@@ -136,7 +136,8 @@ namespace LOLServer.Logic.Fight
                     range = skillLevelData.range,
                     skillType = skillModel.type,
                     targetType = skillModel.target,
-                    time = skillLevelData.time
+                    time = skillLevelData.time,
+                    mp = skillLevelData.mp
                 };
 
                 skills[i] = retFightSkill;
@@ -221,6 +222,10 @@ namespace LOLServer.Logic.Fight
 
                 case FightProtocal.DAMAGE_CREQ:
                     ProcessDamage(token, model.message as DamageDTO);
+                    break;
+
+                case FightProtocal.SKILL_UP_CREQ:
+                    ProcessSkillUp(token, (int)model.message);
                     break;
             }
         }
@@ -350,6 +355,46 @@ namespace LOLServer.Logic.Fight
             {
                 //小兵及建筑伤害请求
             }
+        }
+
+        /// <summary>
+        /// 处理技能升级请求
+        /// </summary>
+        /// <param name="token"></param>
+        /// <param name="skillCode"></param>
+        private void ProcessSkillUp(UserToken token,int skillCode)
+        {
+            int selfId = BizFactory.userBiz.GetInfo(token).id;
+            PlayerFightModel selfModel = GetRoomFightModel(selfId) as PlayerFightModel;
+            foreach (var item in selfModel.skills)
+            {
+                if(item.code == skillCode)
+                {
+                    //找到了要升级的技能
+
+                    if (selfModel.free > 0 && item.nextLevel!=-1)
+                    {
+                        //减少技能点
+                        selfModel.free--;
+
+                        //获取下一级
+                        int nextLevel = item.level + 1;
+
+                        //获取下一级的技能数据
+                        SkillLevelData nextLevelData = SkillData.skillMap[skillCode].levels[nextLevel];
+
+                        //赋值
+                        item.nextLevel = nextLevelData.level;
+                        item.time = nextLevelData.time;
+                        item.mp = nextLevelData.mp;
+                        item.range = nextLevelData.range;
+
+                        //响应给客户端
+                        Write(token, FightProtocal.SKILL_UP_SRES, item);
+                    }
+                }
+            }
+
         }
 
 

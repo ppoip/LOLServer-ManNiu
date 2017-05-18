@@ -19,6 +19,9 @@ namespace GameProtocal.dto.fight
         /// <summary> 冷却时间--ms </summary>
         public int time;
 
+        /// <summary> 消耗的mp </summary>
+        public int mp;
+
         /// <summary> 技能名称 </summary>
         public string name;
 
